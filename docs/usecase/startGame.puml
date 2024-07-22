@@ -1,0 +1,26 @@
+@startuml
+left to right direction
+usecase StartGame as "Start Game"
+usecase RollDice as "Roll Dice"
+usecase BuildHouse as "Build House"
+usecase BuildRoad as "Build Road"
+usecase DrawCard as "Draw Card"
+usecase TradeResource as "Trade Resource"
+
+StartGame --> RollDice
+StartGame --> BuildHouse
+StartGame --> BuildRoad
+StartGame --> DrawCard
+StartGame --> TradeResource
+
+usecase EarnResource as "Earn Resource"
+usecase MoveRobber as "Move Robber"
+usecase StealResource as "Steal Resource"
+usecase ReduceResource as "Reduce Resource"
+
+RollDice <|-- EarnResource
+RollDice <|-- MoveRobber
+MoveRobber ..> StealResource: <<include>>
+MoveRobber ..> ReduceResource: <<include>>
+
+@enduml

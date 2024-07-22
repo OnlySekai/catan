@@ -1,0 +1,47 @@
+@startuml
+
+entity "Player" as Player {
+    +id: string <<key>>
+    --
+    #normalPoint: int <<derived>>
+    #hiddenPoint: int <<derived>>
+    #tempPoint: int <<derived>>
+    --
+    #wood: int
+    #brick: int
+    #stone: int
+    #rice: int
+}
+
+entity "GameSession" as GameSession {
+    +id: string <<key>>
+    --
+    #status: string
+    #robberSlot: int
+}
+
+Player "N" }-right-|| "1" GameSession : joins <<JoinGame>>
+
+entity "Edge" as Edge {
+    +sessionid: string <<fk>>
+    +ownerid: string   <<fk>>
+    --
+    #realPosition: float[][]
+    #virtualPosition: int[][]
+}
+
+entity "Vertex" as Vertex {
+    +sessionid: string <<fk>>
+    +ownerid: string   <<fk>>
+    --
+    #lv: int
+    #lock: bool <<derived>>
+    --
+    #realPosition: float[]
+    #virtualPosition: int[][]
+}
+
+Player "1" |o--{ "N" Edge : has <<HaveEdge>>
+Player "1" |o--{ "n" Vertex : has <<HaveVertex>>
+
+@enduml

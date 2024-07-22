@@ -1,0 +1,16 @@
+@startuml
+left to right direction
+actor Player
+
+usecase JoinGame as "Join Game"
+usecase StartGame as "Start Game"
+usecase ChangeTurn as "Change Turn"
+usecase EndGame as "End Game"
+
+Player --> JoinGame
+Player --> StartGame
+Player --> ChangeTurn
+Player --> EndGame
+StartGame ..> ChangeTurn: <<include>>
+ChangeTurn <.. EndGame: <<extends>>
+@enduml

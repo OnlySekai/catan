@@ -1,0 +1,9 @@
+@startuml
+|Player|
+start
+:Roll dice;
+switch (dice) {
+  case 7:
+    :Move 1;
+}   
+@enduml

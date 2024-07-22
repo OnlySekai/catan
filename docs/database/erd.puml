@@ -1,0 +1,73 @@
+@startchen
+entity Player {
+    id <<key>>
+    point {
+        normalPoint <<derived>>
+        hiddenPoint <<derived>>
+        tempPoint <<derived>>
+    }
+    resource: {
+        wood
+        brick
+        stone
+        rice
+    }
+}
+
+entity GameSession {
+    id <<key>>
+    status
+    
+    robber: {
+        slot <<derived>>
+    }
+}
+relationship JoinGame {
+    joinedAt: datetime
+}
+JoinGame -4- Player
+JoinGame -1- GameSession
+
+
+
+
+entity Edge {
+    position {
+        realPosition
+        virtualPosition <<derived>> <<multi>>
+    }
+}
+
+entity Vertex {
+    lv
+    lock <<derived>>
+    position {
+        realPosition
+        virtualPosition <<derived>> <<multi>>
+    }
+}
+
+relationship HaveEdge {
+}
+HaveEdge -1- Player
+HaveEdge -N- Edge
+
+relationship HaveVertex {
+}
+HaveVertex -1- Player
+HaveVertex -n- Vertex
+
+entity Trader {
+    type: int
+}
+
+relationship HaveRoad {
+}
+
+HaveRoad -1- Trader
+HaveRoad -N- Vertex
+
+
+
+
+@endchen
